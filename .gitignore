@@ -1,0 +1,5 @@
+src/storage/ldfs/*
+src/storage/configs/*
+src/storage/processed/*
+node_modules/*
+dist/*
