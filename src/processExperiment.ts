@@ -46,13 +46,13 @@ export const processExperiment = async (req: Request, res: Response) => {
                 cur += 1;
                 graph.set(parseInt(time), cur);
             });
-            const xData : Array<number> = [];
-            const yData : Array<number> = [];
-            graph.forEach((value, key) => {
+            const xData: Array<number> = [];
+            const yData: Array<number> = [];
+            (new Map([...graph.entries()].sort())).forEach((value, key) => {
                 xData.push(key);
                 yData.push(value);
             });
-             db[i].processedData = [xData, yData];
+            db[i].processedData = [xData, yData];
             break;
         }
     }

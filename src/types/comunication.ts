@@ -15,6 +15,7 @@ export interface IProcessExperiment {
 }
 
 export interface IHistory {
+    id: number;
     ExperimenterName: string;
     ExperimentDate: Moment;
     ExperimentName: string;
@@ -23,6 +24,7 @@ export interface IHistory {
 }
 
 export interface IDetail {
+    id: number;
     ExperimenterName: string;
     ExperimentDate: Moment;
     ExperimentName: string;

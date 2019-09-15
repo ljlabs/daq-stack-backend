@@ -41,7 +41,7 @@ const writeFile = (fileData: string, filePath: string) => {
 
 const getHistory = (req: Request, res: Response) => {
     const db = storage.getDb();
-    const history : Array<IHistory> = []; 
+    const history: Array<IHistory> = [];
     for (let i = 0; i < db.length; i++) {
         history.push({
             Data: db[i].processedData,
@@ -49,6 +49,7 @@ const getHistory = (req: Request, res: Response) => {
             ExperimentName: db[i].experimentName,
             ExperimentShortDescription: db[i].shortDescription,
             ExperimenterName: db[i].experimenterName,
+            id: i,
         });
     }
     res.send(JSON.stringify(history));
@@ -56,7 +57,7 @@ const getHistory = (req: Request, res: Response) => {
 
 const getDetail = (req: Request, res: Response) => {
     const db = storage.getDb();
-    let detail : IDetail;
+    let detail: IDetail;
     for (let i = 0; i < db.length; i++) {
         if (db[i].id === parseInt(req.params.id, 10)) {
             detail = {
@@ -65,12 +66,12 @@ const getDetail = (req: Request, res: Response) => {
                 ExperimentLongDescription: db[i].longDescription,
                 ExperimentName: db[i].experimentName,
                 ExperimenterName: db[i].experimenterName,
+                id: i,
             };
         }
     }
     res.send(JSON.stringify(detail));
 };
-
 
 export const fileManagement = {
     uploadConfigFile: (configFileData: string, configFileName: string, id: number): number => uploadConfigFile(configFileData, configFileName, id),
