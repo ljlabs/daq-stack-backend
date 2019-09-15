@@ -13,3 +13,19 @@ export interface IProcessExperiment {
     experimentFile: string;
     metadata: IMetadata;
 }
+
+export interface IHistory {
+    ExperimenterName: string;
+    ExperimentDate: Moment;
+    ExperimentName: string;
+    ExperimentShortDescription: string;
+    Data: Array<Array<number>>;
+}
+
+export interface IDetail {
+    ExperimenterName: string;
+    ExperimentDate: Moment;
+    ExperimentName: string;
+    ExperimentLongDescription: string;
+    Data: Array<Array<number>>;
+}

@@ -15,7 +15,7 @@ import express from "express";
 import { filePaths } from "./constants/filePaths";
 import { fileManagement } from "./fileManagement";
 import { storage } from "./storage/storage";
-import { ILocation } from "./types/location";
+import { process } from "./processExperiment";
 
 const app = express();
 const port = 8080; // default port to listen
@@ -36,17 +36,19 @@ app.use(busboy({
 })); // Insert the busboy middle-ware
 
 // process experiment
-app.get("/processExperiment", async (req, res) => {
-    console.log("getting Log");
-    // do a get request from the storage bucket to retrive the metadat log
-    // const storageResponse: string = (await axios.get(`${storageBucketUrl}/getImageLog`)).data;
-    // // return the metada log to the client
-    res.send("JSON.stringify(storageResponse)");
+app.get("/getExample", async (req, res) => {
+    await process.readExample(req, res);
+    res.send('completed');
+});
+
+// process experiment
+app.get("/processExperiment/:id", async (req, res) => {
+    await process.experiment(req, res);
+    res.send('completed');
 });
 
 // add new experiment to db
 app.post("/newExperiment", async (req, res) => {
-    console.log(req.body);
     const id = storage.addNewExperiment(
         req.body.shortDescription,
         req.body.longDescription,
@@ -69,6 +71,14 @@ app.post("/upload/config", async (req, res) => {
 // uploads an ldf experiment file, and a xml configuration file
 app.post("/upload/ldf/:id", async (req, res) => {
     fileManagement.uploadLdf(req, res, filePaths.ldf);
+});
+
+app.get("/history", async (req, res) => {
+    fileManagement.getHistory(req, res);
+});
+
+app.get("/details/:id", async (req, res) => {
+    fileManagement.getDetail(req, res);
 });
 
 /**

@@ -3,3 +3,5 @@ src/storage/configs/*
 src/storage/processed/*
 node_modules/*
 dist/*
+example.txt
+src/storage/db.json

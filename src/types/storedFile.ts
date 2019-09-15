@@ -1,5 +1,4 @@
 import { Moment } from "moment";
-import { ILocation } from "./location";
 
 export interface IFileElm {
     id: number;
@@ -11,4 +10,5 @@ export interface IFileElm {
     longDescription: string;
     experimentName: string;
     experimenterName: string;
+    processedData?: Array<any>;
 }
