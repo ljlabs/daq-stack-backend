@@ -38,19 +38,24 @@ export const processExperiment = async (req: Request, res: Response) => {
             // time to process example file <== this is the viewing data
             const data = getDataForGraph();
             const graph: Map<number, number> = new Map<number, number>();
+            const keys: Array<number> = [];
             data.split("\n").forEach((time) => {
                 let cur = graph.get(parseInt(time));
                 if (cur === undefined) {
                     cur = 0;
                 }
                 cur += 1;
+                if (keys.indexOf(parseInt(time)) == -1) {
+                    keys.push(parseInt(time));
+                }
                 graph.set(parseInt(time), cur);
             });
             const xData: Array<number> = [];
             const yData: Array<number> = [];
-            (new Map([...graph.entries()].sort())).forEach((value, key) => {
+            keys.sort((a, b) => a - b).forEach((key: number) => {
+                console.log(key);
                 xData.push(key);
-                yData.push(value);
+                yData.push(graph.get(key));
             });
             db[i].processedData = [xData, yData];
             break;
@@ -62,15 +67,25 @@ export const processExperiment = async (req: Request, res: Response) => {
 const readExample = (req: Request, res: Response) => {
     const data = getDataForGraph();
     const graph: Map<number, number> = new Map<number, number>();
+    const keys: Array<number> = [];
+    const xData: Array<number> = [];
+    const yData: Array<number> = [];
     data.split("\n").forEach((time) => {
         let cur = graph.get(parseInt(time));
         if (cur === undefined) {
             cur = 0;
         }
         cur += 1;
+        if (keys.indexOf(parseInt(time)) == -1) {
+            keys.push(parseInt(time));
+        }
         graph.set(parseInt(time), cur);
     });
-    console.log(graph);
+    keys.sort((a, b) => a - b).forEach((key: number) => {
+        console.log(key);
+        xData.push(key);
+        yData.push(graph.get(key));
+    });
 }
 
 // read the list of image metadata and convert it to a JSON object
