@@ -10,5 +10,6 @@ export interface IFileElm {
     longDescription: string;
     experimentName: string;
     experimenterName: string;
+    experimentXAxis: string;
     processedData?: any[];
 }

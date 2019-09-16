@@ -31,7 +31,7 @@ app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 
 app.use(bodyParser.json());
 
-app.use(express.static('./src/storage/')) // hosts the uploaded documents
+app.use(express.static("./src/storage/")); // hosts the uploaded documents
 
 app.use(busboy({
     highWaterMark: 2 * 1024 * 1024, // Set 2MiB buffer
@@ -55,7 +55,8 @@ app.post("/newExperiment", async (req, res) => {
         req.body.shortDescription,
         req.body.longDescription,
         req.body.experimentName,
-        req.body.experimenterName
+        req.body.experimenterName,
+        req.body.experimentXAxis
     );
     res.send(JSON.stringify({ id }));
 });

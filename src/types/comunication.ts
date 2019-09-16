@@ -6,6 +6,7 @@ export interface IMetadata {
     ExperimentName: string;
     ExperimentShortDescription: string;
     ExperimentLongDescription: string;
+    experimentXAxis: string;
 }
 
 export interface IProcessExperiment {
@@ -21,6 +22,7 @@ export interface IHistory {
     ExperimentName: string;
     ExperimentShortDescription: string;
     Data: number[][];
+    experimentXAxis: string;
 }
 
 export interface IDetail {
@@ -34,4 +36,5 @@ export interface IDetail {
     LdfFileUrl: string;
     RootHistFile: string;
     RootTreeFile: string;
+    experimentXAxis: string;
 }

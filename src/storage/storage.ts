@@ -3,7 +3,7 @@ import moment from "moment";
 import { filePaths } from "../constants/filePaths";
 import { IFileElm } from "../types/storedFile";
 
-export const addNewExperiment = (shortDescription: string, longDescription: string, experimentName: string, experimenterName: string): number => {
+export const addNewExperiment = (shortDescription: string, longDescription: string, experimentName: string, experimenterName: string, experimentXAxis: string): number => {
     const db = getFileDb();
     db.push({
         createdTime: moment(),
@@ -13,6 +13,7 @@ export const addNewExperiment = (shortDescription: string, longDescription: stri
         longDescription,
         experimentName,
         experimenterName,
+        experimentXAxis,
     });
     storeFileDb(JSON.stringify(db));
     return db.length - 1;
@@ -38,6 +39,7 @@ export const storeConfig = (filePath: string, id: number) => {
             longDescription: "",
             experimentName: "",
             experimenterName: "",
+            experimentXAxis: "",
         });
     }
     storeFileDb(JSON.stringify(db));
@@ -62,6 +64,7 @@ export const storeLdf = (filePath: string, id: number) => {
             longDescription: "",
             experimentName: "",
             experimenterName: "",
+            experimentXAxis: "",
         });
     }
     storeFileDb(JSON.stringify(db));
@@ -87,6 +90,7 @@ export const storeProcessed = (filePath: string, id: number) => {
             longDescription: "",
             experimentName: "",
             experimenterName: "",
+            experimentXAxis: "",
         });
     }
     storeFileDb(JSON.stringify(db));
@@ -104,7 +108,7 @@ const storeFileDb = (db: string) => {
 };
 
 export const storage = {
-    addNewExperiment: (shortDescription: string, longDescription: string, experimentName: string, experimenterName: string): number => addNewExperiment(shortDescription, longDescription, experimentName, experimenterName),
+    addNewExperiment: (shortDescription: string, longDescription: string, experimentName: string, experimenterName: string, experimentXAxis: string): number => addNewExperiment(shortDescription, longDescription, experimentName, experimenterName, experimentXAxis),
     getDb: (): IFileElm[] => getFileDb(),
     storeConfig: (filePath: string, id: number) => storeConfig(filePath, id),
     storeDb: (db: string) => storeFileDb(db),
