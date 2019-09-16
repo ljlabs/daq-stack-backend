@@ -16,7 +16,7 @@ export const processExperiment = async (req: Request, res: Response) => {
             // cleanup any example files not moved
             let out = "";
             try {
-                out = (await exec("rm example")).stdout;
+                out = (await exec("rm example.txt")).stdout;
                 console.log(out);
             } catch (error) {
                 console.log(error);
