@@ -31,8 +31,7 @@ app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 
 app.use(bodyParser.json());
 
-// app.use(express.static(__dirname + "/src/storage/"));
-app.use(express.static('./src/storage/'))
+app.use(express.static('./src/storage/')) // hosts the uploaded documents
 
 app.use(busboy({
     highWaterMark: 2 * 1024 * 1024, // Set 2MiB buffer
@@ -100,3 +99,5 @@ app.get("/", async (req, res) => {
 app.listen(port, () => {
     console.log(`server started at http://localhost:${port}`);
 });
+
+export const apiUrl = `http://localhost:${port}`;

@@ -1,5 +1,5 @@
-
 const paassLc = "/home/kyle/Documents/workspace/honsPhy/paass-lc/install/bin";
+
 
 export const filePaths = {
     config: "./src/storage/configs",
@@ -7,5 +7,9 @@ export const filePaths = {
     processed: "./src/storage/processed",
     storageRoot: "./src/storage",
 
-    utkScan: paassLc + "/utkscan"
+    utkScan: paassLc + "/utkscan",
+
+    configUrl: "configs",
+    ldfUrl: "ldfs",
+    processedUrl: "processed"
 };

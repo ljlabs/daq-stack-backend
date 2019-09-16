@@ -30,4 +30,8 @@ export interface IDetail {
     ExperimentName: string;
     ExperimentLongDescription: string;
     Data: number[][];
+    ConfigFileUrl: string;
+    LdfFileUrl: string;
+    RootHistFile: string;
+    RootTreeFile: string;
 }

@@ -60,6 +60,11 @@ const getDetail = (req: Request, res: Response) => {
     let detail: IDetail;
     for (let i = 0; i < db.length; i++) {
         if (db[i].id === parseInt(req.params.id, 10)) {
+            const configFileName : string = db[i].experimentName + i.toString() + ".xml";
+            let ldfFileName : string | string[] = db[i].experimentFilePath.split('/');
+            ldfFileName = (ldfFileName[ldfFileName.length - 1] as string);
+            const processedRootHistFile = db[i].experimentName + i.toString() + "-hist.root";
+            const processedRootTreeFile = db[i].experimentName + i.toString() + "-tree.root";
             detail = {
                 Data: db[i].processedData,
                 ExperimentDate: db[i].createdTime,
@@ -67,6 +72,10 @@ const getDetail = (req: Request, res: Response) => {
                 ExperimentName: db[i].experimentName,
                 ExperimenterName: db[i].experimenterName,
                 id: i,
+                ConfigFileUrl: filePaths.configUrl + "/" + configFileName,
+                LdfFileUrl: filePaths.ldfUrl + "/" + ldfFileName,
+                RootHistFile: filePaths.processedUrl + "/" + processedRootHistFile,
+                RootTreeFile: filePaths.processedUrl + "/" + processedRootTreeFile 
             };
         }
     }
