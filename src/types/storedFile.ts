@@ -10,5 +10,5 @@ export interface IFileElm {
     longDescription: string;
     experimentName: string;
     experimenterName: string;
-    processedData?: Array<any>;
+    processedData?: any[];
 }

@@ -14,8 +14,8 @@ import crypto from "crypto";
 import express from "express";
 import { filePaths } from "./constants/filePaths";
 import { fileManagement } from "./fileManagement";
-import { storage } from "./storage/storage";
 import { process } from "./processExperiment";
+import { storage } from "./storage/storage";
 
 const app = express();
 const port = 8080; // default port to listen
@@ -31,6 +31,9 @@ app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 
 app.use(bodyParser.json());
 
+// app.use(express.static(__dirname + "/src/storage/"));
+app.use(express.static('./src/storage/'))
+
 app.use(busboy({
     highWaterMark: 2 * 1024 * 1024, // Set 2MiB buffer
 })); // Insert the busboy middle-ware
@@ -38,13 +41,13 @@ app.use(busboy({
 // process experiment
 app.get("/getExample", async (req, res) => {
     await process.readExample(req, res);
-    res.send('completed');
+    res.send("completed");
 });
 
 // process experiment
 app.get("/processExperiment/:id", async (req, res) => {
     await process.experiment(req, res);
-    res.send('completed');
+    res.send("completed");
 });
 
 // add new experiment to db

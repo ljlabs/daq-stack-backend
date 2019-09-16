@@ -20,7 +20,7 @@ export interface IHistory {
     ExperimentDate: Moment;
     ExperimentName: string;
     ExperimentShortDescription: string;
-    Data: Array<Array<number>>;
+    Data: number[][];
 }
 
 export interface IDetail {
@@ -29,5 +29,5 @@ export interface IDetail {
     ExperimentDate: Moment;
     ExperimentName: string;
     ExperimentLongDescription: string;
-    Data: Array<Array<number>>;
+    Data: number[][];
 }

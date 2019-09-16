@@ -1,9 +1,9 @@
-import { Request, Response, request } from "express";
+import { Request, request, Response } from "express";
 import fs from "fs-extra";
 import path from "path";
 import { filePaths } from "./constants/filePaths";
 import { storage } from "./storage/storage";
-import { IHistory, IDetail } from "./types/comunication";
+import { IDetail, IHistory } from "./types/comunication";
 
 const uploadPath = path.join(__dirname, "fu/"); // Register the upload path
 fs.ensureDir(uploadPath); // Make sure that he upload path exits
@@ -41,7 +41,7 @@ const writeFile = (fileData: string, filePath: string) => {
 
 const getHistory = (req: Request, res: Response) => {
     const db = storage.getDb();
-    const history: Array<IHistory> = [];
+    const history: IHistory[] = [];
     for (let i = 0; i < db.length; i++) {
         history.push({
             Data: db[i].processedData,
@@ -74,8 +74,8 @@ const getDetail = (req: Request, res: Response) => {
 };
 
 export const fileManagement = {
+    getDetail : (req: Request, res: Response) => getDetail(req, res),
+    getHistory : (req: Request, res: Response) => getHistory(req, res),
     uploadConfigFile: (configFileData: string, configFileName: string, id: number): number => uploadConfigFile(configFileData, configFileName, id),
     uploadLdf : (req: Request, res: Response, filePath: string) => uploadLdf(req, res, filePath),
-    getHistory : (req: Request, res: Response) => getHistory(req, res),
-    getDetail : (req: Request, res: Response) => getDetail(req, res),
 };
